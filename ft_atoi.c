@@ -6,12 +6,11 @@
 /*   By: hnakai <hnakai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 22:05:27 by hnakai            #+#    #+#             */
-/*   Updated: 2023/07/27 23:00:44 by hnakai           ###   ########.fr       */
+/*   Updated: 2023/07/28 17:08:41 by hnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "limits.h"
-#include <stdio.h>
+#include "minitalk.h"
 
 int	ft_isdigit(int c)
 {
