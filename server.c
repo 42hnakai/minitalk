@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnakai <hnakai@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hnakai <hnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:56:59 by hnakai            #+#    #+#             */
-/*   Updated: 2023/07/28 17:30:37 by hnakai           ###   ########.fr       */
+/*   Updated: 2023/07/30 17:15:59 by hnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include <stdio.h>
 #include <unistd.h>
 
-volatile sig_atomic_t bit = 0;
+volatile sig_atomic_t	bit = 0;
 
-void signal_handler(int signum)
+void	signal_handler(int signum)
 {
-	static int count;
-	char c;
+	static int	count;
+	char		c;
+
 	c = 0xff;
+	bit = bit << 1;
 	if (signum == SIGUSR1)
 		bit |= 1;
-	else if (signum == SIGUSR2)
-		;
 	c = c & bit;
 	count++;
 	if (count == 8)
@@ -34,13 +34,14 @@ void signal_handler(int signum)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-	pid_t my_pid;
+	pid_t	my_pid;
+
 	my_pid = getpid();
-	printf("%d", my_pid);
+	printf("%d\n", my_pid);
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
-	while (0)
+	while (1)
 		pause();
 }
