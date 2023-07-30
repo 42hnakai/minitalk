@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnakai <hnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hnakai <hnakai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:43:04 by hnakai            #+#    #+#             */
-/*   Updated: 2023/07/30 17:20:04 by hnakai           ###   ########.fr       */
+/*   Updated: 2023/07/30 18:31:04 by hnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	send_signal(const pid_t pid, char c)
 		else
 			kill(pid, SIGUSR2);
 		i--;
-		usleep(200);
+		usleep(100);
 	}
 }
 
