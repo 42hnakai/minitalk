@@ -6,11 +6,12 @@
 /*   By: hnakai <hnakai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:43:04 by hnakai            #+#    #+#             */
-/*   Updated: 2023/08/01 21:13:00 by hnakai           ###   ########.fr       */
+/*   Updated: 2023/08/01 21:53:10 by hnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include <stdlib.h>
 
 int flag = -1;
 
@@ -31,11 +32,17 @@ void send_signal(const pid_t pid, char c)
 	{
 		flag = -1;
 		if (c & (1 << digit))
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) != 0)
+				exit(1);
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) != 0)
+				exit(1);
+		}
 		digit--;
-		usleep(50);
+		usleep(100);
 		while (flag == -1)
 			pause();
 	}

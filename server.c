@@ -6,7 +6,7 @@
 /*   By: hnakai <hnakai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:56:59 by hnakai            #+#    #+#             */
-/*   Updated: 2023/08/01 21:27:07 by hnakai           ###   ########.fr       */
+/*   Updated: 2023/08/01 21:49:20 by hnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void signal_handler(int signum, siginfo_t *pid, void *context)
 	static int pid2;
 	char c;
 
-	printf("%d", pid2);
 	if (pid2 == 0)
 		pid2 = pid->si_pid;
 	bit = bit << 1;
@@ -37,7 +36,7 @@ void signal_handler(int signum, siginfo_t *pid, void *context)
 			write(STDOUT_FILENO, &c, 1);
 			count = 0;
 		}
-		if (kill(pid2, SIGUSR1) == -1)
+		if (kill(pid2, SIGUSR1) != 0)
 			printf("kill error!\n");
 	}
 	else if (signum == SIGUSR2)
