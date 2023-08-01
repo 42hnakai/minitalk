@@ -6,13 +6,13 @@
 /*   By: hnakai <hnakai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:43:04 by hnakai            #+#    #+#             */
-/*   Updated: 2023/07/30 22:13:08 by hnakai           ###   ########.fr       */
+/*   Updated: 2023/08/01 21:13:00 by hnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int flag;
+int flag = -1;
 
 void signal_handler(int signum)
 {
@@ -24,19 +24,20 @@ void signal_handler(int signum)
 
 void send_signal(const pid_t pid, char c)
 {
-	int i;
+	int digit;
 
-	i = 7;
-	while (i >= 0)
+	digit = 7;
+	while (digit >= 0)
 	{
-		if (c & (1 << i))
+		flag = -1;
+		if (c & (1 << digit))
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		i--;
-		usleep(200);
-		if (flag != 0)
-			break;
+		digit--;
+		usleep(50);
+		while (flag == -1)
+			pause();
 	}
 }
 
