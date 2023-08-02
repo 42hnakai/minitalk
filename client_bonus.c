@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	signal_handler(int signum)
 {
-	if(signum == SIGUSR1)
-		write(1,"received signal!\n",17);
+	if (signum == SIGUSR1)
+		write(1, "received signal!\n", 17);
 }
 
 void	send_signal(const pid_t pid, char c)
@@ -43,7 +43,7 @@ void	send_signal(const pid_t pid, char c)
 
 void split_into_chars(const pid_t pid, char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -53,9 +53,9 @@ void split_into_chars(const pid_t pid, char *str)
 	}
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int	pid;
+	int pid;
 
 	if (argc != 3)
 		return (1);

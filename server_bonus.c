@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
-
-void signal_handler(int signum, siginfo_t *pid, void *context)
+void	signal_handler(int signum, siginfo_t *pid, void *context)
 {
-	static int count;
-	static int  bit;
+	static int	count;
+	static int 	bit;
 
 	bit = bit << 1;
 	(void)context;
@@ -25,7 +24,7 @@ void signal_handler(int signum, siginfo_t *pid, void *context)
 	count++;
 	if (count == 8)
 	{
-		write(1, &bit, 1);
+		write(STDOUT_FILENO, &bit, 1);
 		count = 0;
 		bit = 0;
 		if(kill(pid->si_pid,SIGUSR1)!=0)
@@ -41,7 +40,7 @@ int main(void)
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_SIGINFO;
 	my_pid = getpid();
-	ft_printf("%d\n",my_pid);
+	printf("%d\n",my_pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
