@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnakai <hnakai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:56:59 by hnakai            #+#    #+#             */
-/*   Updated: 2023/08/01 21:49:20 by hnakai           ###   ########.fr       */
+/*   Updated: 2023/08/02 21:31:14 by hnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	signal_handler(int signum, siginfo_t *pid, void *context)
 	count++;
 	if (count == 8)
 	{
-		write(STDOUT_FILENO, &bit, 1);
+		write(1, &bit, 1);
 		count = 0;
 		bit = 0;
 		if(kill(pid->si_pid,SIGUSR1)!=0)
@@ -40,7 +40,7 @@ int main(void)
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_SIGINFO;
 	my_pid = getpid();
-	printf("%d\n",my_pid);
+	ft_printf("%d\n",my_pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
